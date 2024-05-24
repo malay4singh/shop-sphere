@@ -1,0 +1,13 @@
+*{
+        margin: 0;
+        padding: 0;
+        text-decoration: none;
+}
+
+body{
+        background-color: #F0F0F0;
+}
+
+img{
+        object-fit: cover;
+}
