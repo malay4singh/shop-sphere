@@ -19,7 +19,11 @@ connectDB(process.env.DB_URL);
 // -----------------------------------server config
 server.use(express.urlencoded());
 server.use(express.json());
-server.use(cors());
+server.use(cors({
+        origin: process.env.CORS_ORIGIN,
+        methods: ['GET', 'POST', 'PUT', 'DELETE'],
+        allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 
 
