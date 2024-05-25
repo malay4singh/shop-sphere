@@ -18,7 +18,7 @@ connectDB(process.env.DB_URL);
 
 // -----------------------------------server config
 server.use(express.urlencoded());
-server.use(cors({ origin: 'http://localhost:5173' }));
+server.use(cors({ origin: process.env.CORS_ORI }));
 server.use(express.json());
 
 
