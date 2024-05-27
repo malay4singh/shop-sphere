@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../api/axios';
 import { Box, TextField, Typography, Button } from "@mui/material";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -33,7 +33,7 @@ function Login() {
                 e.preventDefault();
 
                 try{
-                        const response = await axios.post('http://localhost:4001/login', loginDetails);
+                        const response = await axios.post('/login', loginDetails);
 
                         if (response.status == 200){
                                 localStorage.setItem('token', response.data.token);

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "../api/axios";
 import ProductCard from "./ProductCard";
 import { Grid } from "@mui/material";
 import Loading from "./Loading";
@@ -22,7 +22,8 @@ function AllProducts() {
 
                 const getAllProducts = async() => {
                         try{
-                                const response = await axios.get('http://localhost:4001/products');
+                                console.log(import.meta.env.VITE_AXIOS_URL);
+                                const response = await axios.get('/products');
                                 setProducts(response.data.products);
                         }catch(error){
                                 console.log(error);

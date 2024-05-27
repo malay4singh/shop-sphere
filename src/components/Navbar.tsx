@@ -1,5 +1,5 @@
 import { Box, Button, Menu, MenuItem } from "@mui/material";
-import axios from "axios";
+import axios from "../api/axios";
 import { memo, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -13,7 +13,7 @@ function Navbar() {
                         if (!localStorage.getItem('token')){
                                 return;
                         } else {
-                                const response = await axios.get('http://localhost:4001/get-username', {
+                                const response = await axios.get('/get-username', {
                                         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
                                 });
         

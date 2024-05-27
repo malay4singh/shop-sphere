@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import axios from 'axios';
+import axios from '../api/axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { TextField, Select, MenuItem, Box, Typography, Button, InputLabel, FormControl, FormHelperText } from '@mui/material';
 import { useEffect } from 'react';
@@ -40,7 +40,7 @@ function SignUp() {
                 initialValues,
                 validationSchema,
                 onSubmit: async (values) => {
-                        const response = await axios.post('http://localhost:4001/signup', values);
+                        const response = await axios.post('/signup', values);
                         if (response.status === 201) {
                                 navigate('/login');
                         }

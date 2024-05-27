@@ -1,7 +1,7 @@
 import { Box, Button, Typography } from "@mui/material";
 import { Delete } from "@mui/icons-material";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "../api/axios";
 
 interface CartItemProps {
         id: string,
@@ -20,7 +20,7 @@ function CartItem(props: CartItemProps) {
 
         const removeFromCart = async () => {
                 try {
-                        const response = await axios.delete(`http://localhost:4001/cart/${props.id}`, {
+                        const response = await axios.delete(`/cart/${props.id}`, {
                                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
                         });
 

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../api/axios";
 import { useEffect, useState } from "react";
 import { Box, Divider, Typography } from "@mui/material";
 import CartItem from "./CartItem";
@@ -22,7 +22,7 @@ function Cart() {
         useEffect( () => {
                 const retrieveCart = async () => {
                         try{
-                                const response = await axios.get('http://localhost:4001/retrieve-cart', {
+                                const response = await axios.get('/retrieve-cart', {
                                         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
                                 })
                                 setCart(response.data.cart);

@@ -1,7 +1,7 @@
 import { Box, Button, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
+import axios from "../api/axios";
 import { AddShoppingCart } from '@mui/icons-material';
 import Loading from "./Loading";
 import Message from "./Message"
@@ -26,7 +26,7 @@ function ShowProduct() {
         useEffect( () => {
                 const getProduct = async () => {
                         try {
-                                const response = await axios.get(`http://localhost:4001/products/${id}`);
+                                const response = await axios.get(`/products/${id}`);
                                 setProduct(response.data.product);
                         } catch (error) {
                                 console.log(error);
@@ -44,7 +44,7 @@ function ShowProduct() {
                                 productID: product?._id
                         }
 
-                        const response = await axios.post('http://localhost:4001/cart/item', payload, {
+                        const response = await axios.post('/cart/item', payload, {
                                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
                         });
 
