@@ -1,8 +1,9 @@
 import axios from "../api/axios";
-import { useEffect, useState } from "react";
-import { Box, Divider, Typography } from "@mui/material";
+import { useEffect, useState, Fragment } from "react";
+import { Box, Button, Divider, Typography } from "@mui/material";
 import CartItem from "./CartItem";
 import Loading from "./Loading";
+import EmptyCart from "./EmptyCart";
 
 interface Product {
         _id: string,
@@ -18,6 +19,7 @@ function Cart() {
         const [cart, setCart] = useState<Product[]>([]);
         const [isLoaded, setIsLoaded] = useState<boolean>(false);
         const [refresh, setRefresh] = useState<boolean>(true);
+        const [totalAmount, setTotalAmount] = useState<number>(0);
 
         useEffect( () => {
                 const retrieveCart = async () => {
@@ -26,6 +28,7 @@ function Cart() {
                                         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
                                 })
                                 setCart(response.data.cart);
+                                setTotalAmount(response.data.totalAmount);
                         } catch (err) {
                                 console.log(err);
                         } finally {
@@ -55,25 +58,51 @@ function Cart() {
                                         <Loading />
                                 }
                                 
-                                {isLoaded &&
-                                        <Box flexBasis={'65%'} bgcolor={'#FFFFFF'} display={'flex'} flexDirection={'column'} overflow={'scroll'} padding={2}>
+                                {isLoaded && cart.length != 0 &&
+                                        <Box flexBasis={'65%'} display={'flex'} flexDirection={'column'} overflow={'scroll'} padding={0}>
                                                 {cart.map( (item, index) => (
-                                                        <>
-                                                                <CartItem onRemove={refreshCart} id={item._id} title={item.title} category={item.category} price={item.price} img={item.img} key={index} />
-                                                                <Divider />
-                                                        </>
+                                                        <Fragment key={index}>
+                                                                <CartItem onRemove={refreshCart} id={item._id} title={item.title} category={item.category} price={item.price} img={item.img} />
+                                                                {index < cart.length - 1 && <Divider />}
+                                                      </Fragment>
                                                 )) }
                                         </Box>
 
                                         
                                 }
 
-                                {isLoaded &&
+                                {isLoaded && cart.length != 0 &&
                                         <Box flexBasis={'35%'} display={'flex'} justifyContent={'center'}>
-                                                <Box bgcolor={'#FFFFFF'} width={'85%'} height={'75%'} mt={3} boxShadow={'0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'} borderRadius={1.5}>
+                                                <Box bgcolor={'#FFFFFF'} width={' 60%'} height={'50%'} mt={3} boxShadow={'0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'} borderRadius={1.5} padding={5} display={'flex'} flexDirection={'column'} justifyContent={'space-between'}>
+                                                        <Typography variant="h5">Cart Summary</Typography>
 
+                                                        <Box display={'flex'} flexDirection={'column'} gap={0.5}>
+                                                                <Box display={'flex'} justifyContent={'space-between'} alignItems={'center'}>
+                                                                        <Typography variant="subtitle1">Number of items</Typography>
+                                                                        <Typography variant="subtitle1">{cart.length}</Typography>
+                                                                </Box>
+                                                                <Box display={'flex'} justifyContent={'space-between'} alignItems={'center'}>
+                                                                        <Typography variant="subtitle1">Amount</Typography>
+                                                                        <Typography variant="subtitle1">₹ {totalAmount}</Typography>
+                                                                </Box>
+                                                                <Box display={'flex'} justifyContent={'space-between'} alignItems={'center'}>
+                                                                        <Typography variant="subtitle1">Shipping</Typography>
+                                                                        <Typography color={'green'} variant="button">Free</Typography>
+                                                                </Box>
+                                                                <Divider />
+                                                                <Box display={'flex'} justifyContent={'space-between'} alignItems={'center'}>
+                                                                        <Typography variant="h6">Grand Total</Typography>
+                                                                        <Typography variant="h6">₹ {totalAmount}</Typography>
+                                                                </Box>
+                                                        </Box>
+
+                                                        <Button variant="contained">Go to Checkout</Button>
                                                 </Box>
                                         </Box>
+                                }
+
+                                {isLoaded && cart.length == 0 &&
+                                        <EmptyCart />
                                 }
 
                         </Box>

@@ -69,56 +69,31 @@ function ShowProduct() {
 
                         {isLoaded &&
                                 <Box>
-                                        <Box
-                                                m={15}
-                                                display={'flex'}
-                                                justifyContent={'center'}
-                                        >
+                                        <Box m={15} display={'flex'} justifyContent={'center'}>
 
-                                                <Box
-                                                        flexBasis={'100%'}
-                                                        display={'flex'}
-                                                        justifyContent={'center'}
-                                                        alignItems={'center'}
-                                                >
-                                                        <img
-                                                                src={product?.img}
-                                                                width={'450px'}
-                                                                height={'350px'}
-                                                        />
+                                                <Box flexBasis={'100%'} display={'flex'} justifyContent={'center'} alignItems={'center'}>
+                                                        <img src={product?.img} width={'450px'} height={'350px'} />
                                                 </Box>
 
-                                                <Box
-                                                        display={'flex'}
-                                                        flexDirection={'column'}
-                                                        justifyContent={'center'}
-                                                        p={4}
-                                                        gap={10}
-                                                >
-                                                        <Box
-                                                                display={'flex'}
-                                                                flexDirection={'column'}
-                                                                gap={5}
-                                                        >
-                                                                <Typography variant="h4">{product?.title}</Typography>
+                                                <Box display={'flex'} flexDirection={'column'} justifyContent={'center'} p={4} gap={10}>
+
+                                                        <Box display={'flex'} flexDirection={'column'} gap={5}>
+                                                                <Box display={'flex'} flexDirection={'column'} gap={1}>
+                                                                        <Typography color={'#9CA3AF'} variant="button">{product?.category}</Typography>
+                                                                        <Typography variant="h4">{product?.title}</Typography>
+                                                                </Box>
                                                                 <Typography variant="h6">{product?.desc}</Typography>
                                                         </Box>
 
-                                                        <Box
-                                                                display={'flex'}
-                                                                alignItems={'center'}
-                                                                gap={10}
-                                                        >
+                                                        <Box display={'flex'} alignItems={'center'} gap={10}>
+
                                                                 <Typography variant="h4">₹ {product?.price}</Typography>
-                                                                <Button
-                                                                        variant="contained"
-                                                                        startIcon={<AddShoppingCart />}
-                                                                        sx={{color: "#F0F0F0"}}
-                                                                        onClick={addToCart}
-                                                                >
+                                                                <Button variant="contained" startIcon={<AddShoppingCart />} sx={{color: "#F0F0F0"}} onClick={addToCart}>
                                                                         Add to Cart
                                                                 </Button>
+
                                                         </Box>
+
                                                 </Box>
                                         </Box>
 

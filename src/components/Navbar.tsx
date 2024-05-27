@@ -42,15 +42,14 @@ function Navbar() {
 
         const handleLogout = () => {
                 localStorage.clear();
-
                 window.location.reload();
         }
 
         return (
                 <Box width={'100dvw'} height={'9dvh'} bgcolor={'rgba(42, 93, 156, 0.96)'} display={'flex'} alignItems={'center'} justifyContent={'center'} position={'fixed'}>
-                        <Box width={'100%'} maxWidth={'1350px'} display={'flex'} justifyContent={'space-between'} px={4} alignItems={'center'}>
+                        <Box width={'100%'} display={'flex'} justifyContent={'space-between'} px={10} alignItems={'center'}>
                                 <Box>
-                                        <img src="/logo.png" width={'200px'} />
+                                        <Link to='/home'><img src="/logo.png" width={'200px'} /></Link>
                                 </Box>
                                 <Box display={'flex'} gap={5}>
                                         <Link to={'/products'}><Button sx={secondary}>Products</Button></Link>
