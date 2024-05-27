@@ -54,9 +54,15 @@ module.exports.retrieveCart = async (req, res) => {
         
         const user = await User.findById(userID).populate('cart');
 
+        let totalAmount = 0;
+        user.cart.map(item => {
+                totalAmount+=item.price;
+        })
+
         res.status(200).json({
                 success: true,
                 message: "Cart retrieved from database",
-                cart: user.cart
+                cart: user.cart,
+                totalAmount
         })
 }
