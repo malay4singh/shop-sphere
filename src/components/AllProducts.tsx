@@ -22,7 +22,6 @@ function AllProducts() {
 
                 const getAllProducts = async() => {
                         try{
-                                console.log(import.meta.env.VITE_AXIOS_URL);
                                 const response = await axios.get('/products');
                                 setProducts(response.data.products);
                         }catch(error){
