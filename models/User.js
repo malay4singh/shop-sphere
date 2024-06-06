@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const Product = require('./Product')
 
 const User = mongoose.model('User', mongoose.Schema({
         username: {
@@ -11,13 +10,17 @@ const User = mongoose.model('User', mongoose.Schema({
                 type: String,
                 required: true,
         },
-        role_id: {
+        roleID: {
                 type: Number,
                 required: true
         },
         cart: [{
                 type: mongoose.Types.ObjectId,
                 ref: 'Product'
+        }],
+        address: [{
+                type: mongoose.Types.ObjectId,
+                ref  : 'Address'
         }]
 }))
 

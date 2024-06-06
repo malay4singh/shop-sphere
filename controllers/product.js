@@ -20,3 +20,12 @@ module.exports.showProduct = async (req, res) => {
         })
 }
 
+module.exports.similarProducts = async (req, res) => {
+        const { category, excludeID } = req.body;
+        const products = await Product.find({ category, _id: { $ne: excludeID }, });
+
+        res.status(200).json({
+                success: true,
+                products
+        })
+}
