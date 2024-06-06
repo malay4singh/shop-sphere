@@ -20,10 +20,7 @@ interface Order {
         id: string
 }
 
-interface ReviewOrderProps {
-}
-
-function ReviewOrder(props: ReviewOrderProps) {
+function ReviewOrder() {
 
         const [Razorpay] = useRazorpay();
         const navigate = useNavigate();
@@ -64,10 +61,10 @@ function ReviewOrder(props: ReviewOrderProps) {
                 }
         }
 
-        const handlePayment = (order: any) => {
+        const handlePayment = (order: Order) => {
                 const rzp = new Razorpay({
                         key: import.meta.env.VITE_RZP_ID,
-                        amount: order.amount,
+                        amount: String(order.amount),
                         currency: 'INR',
                         name: 'Shop Sphere',
                         image: 'https://i.imghippo.com/files/b6tVw1717655776.png',
