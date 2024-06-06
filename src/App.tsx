@@ -6,6 +6,9 @@ import SignUp from "./components/SignUp";
 import Wrapper from "./components/Wrapper";
 import Cart from "./components/Cart";
 import Home from "./components/Home";
+import Checkout from "./components/Checkout";
+import ViewOrder from "./components/ViewOrder";
+// import PrivateRouter from "./components/PrivateRouter";
 
 function App() {
         return (
@@ -17,11 +20,17 @@ function App() {
 
                                         <Route path="/login" element={<Login />} />
                                         <Route path="/sign-up" element={<SignUp />} />
-
+                                        
                                         <Route path="/" element={<Wrapper />}>
                                                 <Route path="/products" element={<AllProducts />} />
                                                 <Route path="/products/:id" element={<ShowProduct />} />
-                                                <Route path="/cart" element={<Cart />} />
+                                                <Route path="/checkout" element={<Checkout />} />
+
+                                                {/* <Route element={<PrivateRouter roles={[1]} />}> */}
+                                                        <Route path="/cart" element={<Cart />} />
+                                                        <Route path="/order/:id" element={<ViewOrder />} />
+                                                {/* </Route> */}
+
                                         </Route>
 
                                 </Routes>

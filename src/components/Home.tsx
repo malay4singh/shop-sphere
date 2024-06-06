@@ -12,12 +12,12 @@ function Home() {
                         if (!localStorage.getItem('token')){
                                 return;
                         } else {
-                                const response = await axios.get('/get-username', {
+                                const response = await axios.get('/get-user', {
                                         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
                                 });
         
                                 if (response.status == 200){
-                                        setUsername(response.data.username);
+                                        setUsername(response.data.user.username);
                                 }
                         }  
                 }
@@ -41,7 +41,7 @@ function Home() {
                                                 <Typography variant="h4">Welcome to Shop Sphere</Typography>
                                                 <Box display={'flex'} justifyContent={'space-around'} width={'80%'}>
                                                         <Link to='/login'><Button variant="contained">Login</Button></Link>
-                                                        <Link to='/signup'><Button variant="outlined">Sign up</Button></Link>
+                                                        <Link to='/sign-up'><Button variant="outlined">Sign up</Button></Link>
                                                 </Box>
                                                 <Link to='/products'><Button>Browse as Guest</Button></Link>
                                         </Box>

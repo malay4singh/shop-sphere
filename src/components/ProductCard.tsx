@@ -14,7 +14,7 @@ function ProductCard(props: ProductCard) {
 
         return (
                 <Link to={link}>
-                        <Box boxShadow={'0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'} borderRadius={2} bgcolor={'#FFFFFF'} p={3} height={'50vh'}>
+                        <Box boxShadow={'0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'} borderRadius={2} bgcolor={'#f1f1e6'} p={3} height={'50vh'}>
                                 
                                 <img id="product-image" src={props.img} width={"100%"} height={'50%'} />
                                 

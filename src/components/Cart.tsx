@@ -4,6 +4,7 @@ import { Box, Button, Divider, Typography } from "@mui/material";
 import CartItem from "./CartItem";
 import Loading from "./Loading";
 import EmptyCart from "./EmptyCart";
+import { Link } from "react-router-dom";
 
 interface Product {
         _id: string,
@@ -96,7 +97,7 @@ function Cart() {
                                                                 </Box>
                                                         </Box>
 
-                                                        <Button variant="contained">Go to Checkout</Button>
+                                                        <Link to={'/checkout'}><Button variant="contained">Go to Checkout</Button></Link>
                                                 </Box>
                                         </Box>
                                 }

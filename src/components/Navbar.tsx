@@ -1,9 +1,11 @@
 import { Box, Button, Menu, MenuItem } from "@mui/material";
 import axios from "../api/axios";
 import { memo, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Navbar() {
+
+        const navigate = useNavigate();
 
         const [anchor, setAnchor] = useState<null | HTMLElement>(null);
         const [username, setUsername] = useState<string | null>(null);
@@ -13,12 +15,12 @@ function Navbar() {
                         if (!localStorage.getItem('token')){
                                 return;
                         } else {
-                                const response = await axios.get('/get-username', {
-                                        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+                                const response = await axios.get('/get-user', {
+                                        headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}
                                 });
         
                                 if (response.status == 200){
-                                        setUsername(response.data.username);
+                                        setUsername(response.data.user.username);
                                 }
                         }  
                 }
@@ -42,6 +44,7 @@ function Navbar() {
 
         const handleLogout = () => {
                 localStorage.clear();
+                navigate('/products');
                 window.location.reload();
         }
 

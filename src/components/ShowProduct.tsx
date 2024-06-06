@@ -5,6 +5,7 @@ import axios from "../api/axios";
 import { AddShoppingCart } from '@mui/icons-material';
 import Loading from "./Loading";
 import Message from "./Message"
+import SimilarProducts from "./SimilarProducts";
 
 interface Product {
         _id: string,
@@ -36,7 +37,7 @@ function ShowProduct() {
                 }
 
                 getProduct();
-        }, [])
+        }, [id])
 
         const addToCart = async () => {
                 try {
@@ -68,14 +69,14 @@ function ShowProduct() {
                         }
 
                         {isLoaded &&
-                                <Box>
-                                        <Box m={15} display={'flex'} justifyContent={'center'}>
+                                <Box bgcolor={'#f1f1e6'} border={'2px solid #f1f1e6'} boxShadow={'0 6px 20px 0 rgba(0, 0, 0, 0.19)'}>
+                                        <Box m={10} display={'flex'} justifyContent={'space-around'} alignItems={'center'}>
 
-                                                <Box flexBasis={'100%'} display={'flex'} justifyContent={'center'} alignItems={'center'}>
-                                                        <img src={product?.img} width={'450px'} height={'350px'} />
+                                                <Box display={'flex'} justifyContent={'center'} alignItems={'center'} height={'40dvh'} width={'60dvh'}>
+                                                        <img src={product?.img} width={'100%'} height={'100%'} />
                                                 </Box>
 
-                                                <Box display={'flex'} flexDirection={'column'} justifyContent={'center'} p={4} gap={10}>
+                                                <Box flexBasis={'50%'} display={'flex'} flexDirection={'column'} justifyContent={'center'} p={4} gap={10}>
 
                                                         <Box display={'flex'} flexDirection={'column'} gap={5}>
                                                                 <Box display={'flex'} flexDirection={'column'} gap={1}>
@@ -102,6 +103,10 @@ function ShowProduct() {
                                         }
 
                                 </Box>
+                        }
+
+                        {isLoaded &&
+                                <SimilarProducts category={product?.category as string} excludeID={product?._id as string} />
                         }
                 </>
         )
