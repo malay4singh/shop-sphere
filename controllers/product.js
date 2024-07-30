@@ -29,3 +29,14 @@ module.exports.similarProducts = async (req, res) => {
                 products
         })
 }
+
+module.exports.addProduct = async (req, res) => {
+        const { title, category, price, desc, img } = req.body;
+        const reviews = [];
+
+        await Product.create({ title, category, price, desc, img, reviews });
+
+        res.status(201).json({
+                success: true
+        })
+}

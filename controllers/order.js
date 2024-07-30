@@ -45,6 +45,7 @@ module.exports.createOrder = async (req, res) => {
 }
 
 module.exports.verifyOrder = async (req, res) => {
+        const { userID } = req.userData;
         const { razorpay_payment_id, razorpay_order_id, razorpay_signature }=req.body;
 
         const isValid = validatePaymentVerification({
@@ -59,10 +60,29 @@ module.exports.verifyOrder = async (req, res) => {
                 })
         }
 
-        await Order.findByIdAndUpdate({ _id:razorpay_order_id }, { paymentStatus:true });
+        const order = await Order.findById(razorpay_order_id);
+
+        order.payment_status = true;
+        await order.save();
+
+        const user = await User.findById(userID).populate('cart');
+        user.cart = [];
+        await user.save();
 
         res.status(200).json({
                 success: true,
                 message: 'Payment Verification successful'
+        })
+}
+
+module.exports.getOrder = async (req, res) => {
+        const { id } = req.params;
+
+        const order = await Order.findById(id);
+
+        res.status(200).json({
+                success: true,
+                message: 'Order fetched successfully',
+                order
         })
 }

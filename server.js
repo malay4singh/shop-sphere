@@ -48,5 +48,5 @@ server.use(orderRouter)
 // -----------------------------------functions
 async function connectDB(url){
         await mongoose.connect(url);
-        console.log(`DB Connected`);
+        console.log(`Database Connected`);
 }

@@ -34,6 +34,7 @@ module.exports.login = async (req, res) =>{
         res.status(200).json({
                 success: true,
                 msg: "Login successful",
-                token
+                token,
+                roleID: user.roleID
         })
 }
