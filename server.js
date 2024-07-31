@@ -6,6 +6,7 @@ const cartRouter = require('./routes/cart');
 const authRouter = require('./routes/auth');
 const userRouter = require('./routes/user');
 const orderRouter = require('./routes/order');
+const portfolioRouter = require('./routes/portfolio');
 const cors = require('cors');
 const PORT = process.env.PORT;
 
@@ -22,7 +23,7 @@ connectDB(process.env.DB_URL);
 server.use(express.urlencoded({ extended: true }));
 server.use(express.json());
 server.use(cors({
-        origin: process.env.CORS_ORIGIN,
+        origin: '*',
         methods: ['GET', 'POST', 'PUT', 'DELETE'],
         allowedHeaders: ['Content-Type', 'Authorization']
 }));
@@ -41,7 +42,8 @@ server.use('/products', productRouter);
 server.use(cartRouter);
 server.use(authRouter);
 server.use(userRouter);
-server.use(orderRouter)
+server.use(orderRouter);
+server.use('/portfolio', portfolioRouter);
 
 
 
