@@ -1,0 +1,15 @@
+name: Webhook Trigger
+
+on:
+  push:
+    branches:
+      - server
+
+jobs:
+  trigger-webhook:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Send webhook to server
+      run: |
+        curl -X POST http://malaysingh.com:3000 -H "Content-Type: application/json" -d '{"event": "push", "branch": "${{ github.ref_name }}", "repo": "${{ github.repository }}" }'

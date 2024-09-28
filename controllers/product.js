@@ -1,5 +1,5 @@
 const Product = require('../models/Product');
-const User = require('../models/User')
+const Review = require('../models/Review');
 
 module.exports.showAllProducts = async (req, res) => {
         const products = await Product.find({});

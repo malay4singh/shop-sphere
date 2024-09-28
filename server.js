@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const productRouter = require('./routes/product');
+const reviewRouter = require('./routes/review');
 const cartRouter = require('./routes/cart');
 const authRouter = require('./routes/auth');
 const userRouter = require('./routes/user');
@@ -39,6 +40,7 @@ server.listen(PORT, () => {
 
 // -----------------------------------routers
 server.use('/products', productRouter);
+server.use('/review', reviewRouter);
 server.use(cartRouter);
 server.use(authRouter);
 server.use(userRouter);

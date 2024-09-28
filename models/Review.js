@@ -6,7 +6,8 @@ const Review = mongoose.model('Review', mongoose.Schema({
                 min: 0,
                 max: 5
         },
-        comment: String
+        comment: String,
+        username: String
 }))
 
 module.exports = Review;
