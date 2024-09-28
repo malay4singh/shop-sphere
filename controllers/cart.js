@@ -15,7 +15,6 @@ module.exports.addToCart = async (req, res) => {
         }
 
         const product = await Product.findById(productID);
-
         user.cart.push(product);
         await user.save();
 
