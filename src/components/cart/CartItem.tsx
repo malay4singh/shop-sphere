@@ -1,7 +1,7 @@
 import { Box, Button, Typography } from "@mui/material";
 import { Delete } from "@mui/icons-material";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "../api/axios";
+import axios from "../../api/axios";
 
 interface CartItemProps {
         id: string,

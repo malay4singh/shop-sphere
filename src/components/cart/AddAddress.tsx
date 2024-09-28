@@ -1,7 +1,7 @@
 import { Box, Button, TextField, Typography } from "@mui/material"
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import axios from "../api/axios";
+import axios from "../../api/axios";
 
 interface Address {
         house: string,

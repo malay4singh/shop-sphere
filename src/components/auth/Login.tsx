@@ -1,8 +1,8 @@
-import axios from '../api/axios';
+import axios from '../../api/axios';
 import { Box, TextField, Typography, Button } from "@mui/material";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Error from './Error';
+import Error from '../assets/Error';
 
 interface Details {
         username: String,
@@ -37,6 +37,7 @@ function Login() {
 
                         if (response.status == 200){
                                 localStorage.setItem('token', response.data.token);
+                                localStorage.setItem('roleID', response.data.roleID);
                                 navigate('/products');
                         }
                 } catch (err) {

@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import axios from '../api/axios';
+import axios from '../../api/axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { TextField, Select, MenuItem, Box, Typography, Button, InputLabel, FormControl, FormHelperText } from '@mui/material';
 import { useEffect } from 'react';
@@ -89,7 +89,6 @@ function SignUp() {
                                                                 onBlur={formik.handleBlur}
                                                                 helperText={formik.touched.passwd && formik.errors.passwd}
                                                                 error={formik.touched.passwd && Boolean(formik.errors.passwd)}
-
                                                         />
 
                                                         <FormControl>

@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import axios from "../api/axios";
-import Loading from "./Loading";
+import axios from "../../api/axios";
+import Loading from "../assets/Loading";
 import SimilarProductCard from "./SimilarProductCard";
 
 interface SimilarProductsProps {
@@ -40,7 +40,7 @@ function SimilarProducts(props: SimilarProductsProps) {
                 }
 
                 getSimilarProducts();
-        }, [])
+        }, [props.excludeID])
 
         return (
                 <>
@@ -49,13 +49,13 @@ function SimilarProducts(props: SimilarProductsProps) {
                         }
 
                         {isLoaded &&
-                                <Box px={10} py={5} display={'flex'} flexDirection={'column'} gap={3}>
+                                <Box px={10} py={8} display={'flex'} flexDirection={'column'} gap={3}>
 
                                         <Box>
                                                 <Typography variant="h5">Similar Products</Typography>
                                         </Box>
                                         
-                                        <Box height={'40dvh'} display={'flex'} justifyContent={'space-between'}>
+                                        <Box display={'flex'} justifyContent={'space-between'}>
                                                 {products.map ((item, index) => (
                                                         <Box key={index}>
                                                                 <SimilarProductCard product={item} />

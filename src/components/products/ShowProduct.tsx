@@ -1,11 +1,14 @@
 import { Box, Button, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import axios from "../api/axios";
+import { useNavigate, useParams, Link } from "react-router-dom";
+import axios from "../../api/axios";
 import { AddShoppingCart } from '@mui/icons-material';
-import Loading from "./Loading";
-import Message from "./Message"
+import EditRoundedIcon from '@mui/icons-material/EditRounded';
+import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
+import Loading from "../assets/Loading";
+import Message from "../assets/Message"
 import SimilarProducts from "./SimilarProducts";
+import Reviews from "./Reviews";
 
 interface Product {
         _id: string,
@@ -58,9 +61,15 @@ function ShowProduct() {
                 }
         }
 
+        const handleDelete = async () => {
+
+        }
+
         const removeMessage = () => {
                 setIsAdded(false);
         }
+
+        const roleID: number | null = JSON.parse(localStorage.getItem('roleID') as string);
 
         return (
                 <>
@@ -89,9 +98,22 @@ function ShowProduct() {
                                                         <Box display={'flex'} alignItems={'center'} gap={10}>
 
                                                                 <Typography variant="h4">₹ {product?.price}</Typography>
-                                                                <Button variant="contained" startIcon={<AddShoppingCart />} sx={{color: "#F0F0F0"}} onClick={addToCart}>
-                                                                        Add to Cart
-                                                                </Button>
+                                                                {roleID != 2 &&
+                                                                        <Button variant="contained" startIcon={<AddShoppingCart />} sx={{color: "#F0F0F0", position: "inherit"}} onClick={addToCart}>
+                                                                                Add to Cart
+                                                                        </Button>
+                                                                }
+
+                                                                {roleID && roleID == 2 &&
+                                                                        <Box display={'flex'} gap={2}>
+                                                                                <Link to={`/products/${id}/edit`}><Button variant="contained" startIcon={<EditRoundedIcon />} sx={{color: "#F0F0F0", position: "inherit"}}>
+                                                                                        Edit
+                                                                                </Button></Link>
+                                                                                <Button variant="contained" color="error" startIcon={<DeleteForeverRoundedIcon />} sx={{color: "#F0F0F0", position: "inherit"}} onClick={handleDelete}>
+                                                                                        Delete
+                                                                                </Button>
+                                                                        </Box>
+                                                                }
 
                                                         </Box>
 
@@ -107,6 +129,10 @@ function ShowProduct() {
 
                         {isLoaded &&
                                 <SimilarProducts category={product?.category as string} excludeID={product?._id as string} />
+                        }
+
+                        {isLoaded &&
+                                <Reviews productID={product?._id as string} />
                         }
                 </>
         )

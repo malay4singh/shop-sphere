@@ -1,8 +1,8 @@
-import axios from "../api/axios";
+import axios from "../../api/axios";
 import { useEffect, useState, Fragment } from "react";
 import { Box, Button, Divider, Typography } from "@mui/material";
 import CartItem from "./CartItem";
-import Loading from "./Loading";
+import Loading from "../assets/Loading";
 import EmptyCart from "./EmptyCart";
 import { Link } from "react-router-dom";
 

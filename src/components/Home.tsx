@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 function Home() {
 
         const [username, setUsername] = useState<string | null>(null);
+        const [roleID, setRoleID] = useState<number | null>(null);
 
         useEffect( () => {
                 const loginStatus = async () => {
@@ -18,6 +19,7 @@ function Home() {
         
                                 if (response.status == 200){
                                         setUsername(response.data.user.username);
+                                        setRoleID(response.data.user.roleID);
                                 }
                         }  
                 }
@@ -50,11 +52,26 @@ function Home() {
                                 {username &&
                                         <Box bgcolor={'#F0F0F0'} display={'flex'} flexDirection={'column'} alignItems={'center'} gap={7} p={5} borderRadius={2} >
                                                 <Typography variant="h3">Welcome back, {username}</Typography>
-                                                <Box display={'flex'} justifyContent={'space-around'} width={'80%'}>
-                                                        <Link to='/cart'><Button variant="contained">Go to cart</Button></Link>
-                                                        <Button onClick={handleLogout} variant="outlined">Logout</Button>
-                                                </Box>
-                                                <Link to='/products'><Button>Continue Shopping</Button></Link>
+
+                                                {roleID == 1 &&
+                                                        <>
+                                                                <Box display={'flex'} justifyContent={'space-around'} width={'80%'}>
+                                                                        <Link to='/cart'><Button variant="contained">Go to cart</Button></Link>
+                                                                        <Button onClick={handleLogout} variant="outlined">Logout</Button>
+                                                                </Box>
+                                                                <Link to='/products'><Button>Continue Shopping</Button></Link>
+                                                        </>
+                                                }
+
+                                                {roleID == 2 &&
+                                                        <>
+                                                                <Box display={'flex'} justifyContent={'space-around'} width={'80%'}>
+                                                                        <Link to='/products'><Button variant="contained">Go to Products</Button></Link>
+                                                                        <Button onClick={handleLogout} variant="outlined">Logout</Button>
+                                                                </Box>
+                                                        </>
+                                                }
+
                                         </Box>
                                 }
                         </Box>

@@ -1,14 +1,17 @@
-import { Box, Button, Menu, MenuItem } from "@mui/material";
+import { Avatar, Badge, Box, Button, Typography } from "@mui/material";
 import axios from "../api/axios";
 import { memo, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 function Navbar() {
 
         const navigate = useNavigate();
 
-        const [anchor, setAnchor] = useState<null | HTMLElement>(null);
         const [username, setUsername] = useState<string | null>(null);
+        const [roleID, setRoleID] = useState<number | null>(null);
+        const [cartNumber, setCartNumber] = useState<number>(0);
 
         useEffect( () => {
                 const loginStatus = async () => {
@@ -21,6 +24,8 @@ function Navbar() {
         
                                 if (response.status == 200){
                                         setUsername(response.data.user.username);
+                                        setRoleID(response.data.user.roleID)
+                                        setCartNumber(response.data.user.cart.length);
                                 }
                         }  
                 }
@@ -30,16 +35,6 @@ function Navbar() {
 
         const secondary = {
                 color: '#F0F0F0'
-        }
-
-        const open = Boolean(anchor);
-
-        const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-                setAnchor(event.currentTarget);
-        }
-
-        const handleClose = () => {
-                setAnchor(null);
         }
 
         const handleLogout = () => {
@@ -54,38 +49,34 @@ function Navbar() {
                                 <Box>
                                         <Link to='/home'><img src="/logo.png" width={'200px'} /></Link>
                                 </Box>
-                                <Box display={'flex'} gap={5}>
+                                <Box display={'flex'} gap={3} alignItems={'center'}>
                                         <Link to={'/products'}><Button sx={secondary}>Products</Button></Link>
                                         {!username &&
                                                 <Link to={'/login'}><Button sx={secondary}>Login / Sign Up</Button></Link>
                                         }
+
                                         {username && 
-                                                <Box>
-                                                        <Button 
-                                                                sx={secondary}
-                                                                id="account-button"
-                                                                aria-controls={open ? 'account-menu' : undefined}
-                                                                aria-haspopup="true"
-                                                                aria-expanded={open ? 'true' : undefined}
-                                                                onClick={handleClick}
-                                                        >
-                                                                Hi, {username}
-                                                        </Button>
-                                                        
-                                                        <Menu
-                                                                sx={{padding: '5rem'}}
-                                                                id="account-menu"
-                                                                anchorEl={anchor}
-                                                                open={open}
-                                                                onClose={handleClose}
-                                                                MenuListProps={{
-                                                                'aria-labelledby': 'account-button'
-                                                                }}
-                                                        >
-                                                                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                                                                <Link to={'/cart'}><MenuItem sx={{color: 'black'}} onClick={handleClose}>Cart</MenuItem></Link>
-                                                                <MenuItem onClick={handleLogout}>Logout</MenuItem>
-                                                        </Menu>
+                                                <Box display={'flex'} gap={3} alignItems={'center'}>
+                                                        {roleID && roleID == 2 &&
+                                                                <Link to={'/products/new'}><Button sx={secondary}>Add Product</Button></Link>
+                                                        }
+
+                                                        {roleID && roleID == 1 &&
+                                                                <Link to={'/cart'}>
+                                                                        <Button>
+                                                                                <Badge badgeContent={cartNumber} color="error">
+                                                                                        <ShoppingCartRoundedIcon sx={secondary} />
+                                                                                </Badge>
+                                                                        </Button>
+                                                                </Link>
+                                                        }
+
+                                                        <Box display={'flex'} gap={'8px'} alignItems={'center'}>
+                                                                <Avatar sx={{ height: "1.7rem", width: "1.7rem" }}>{username.slice()[0].toUpperCase()}</Avatar>
+                                                                <Typography color={'#F0F0F0'} variant="button">{username}</Typography>
+                                                        </Box>
+
+                                                        <Button onClick={handleLogout}><LogoutIcon sx={secondary} /></Button>
                                                 </Box>
                                         }
                                 </Box>

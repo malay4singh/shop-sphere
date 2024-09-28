@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import axios from "../api/axios";
+import axios from "../../api/axios";
 import ProductCard from "./ProductCard";
 import { Grid } from "@mui/material";
-import Loading from "./Loading";
+import Loading from "../assets/Loading";
 
 interface Product {
         _id: string,

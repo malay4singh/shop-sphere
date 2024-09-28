@@ -1,7 +1,7 @@
 import { Box, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import axios from "../api/axios";
-import Loading from "./Loading";
+import axios from "../../api/axios";
+import Loading from "../assets/Loading";
 import AddAddress from "./AddAddress";
 import AddressCard from "./AddressCard";
 

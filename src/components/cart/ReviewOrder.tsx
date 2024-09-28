@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { Box, Button, Divider, Grid, Typography } from "@mui/material";
-import axios from "../api/axios";
-import Loading from "./Loading";
+import axios from "../../api/axios";
+import Loading from "../assets/Loading";
 import ReviewItem from "./ReviewItem";
-import useRazorpay from "react-razorpay";
+import { useRazorpay } from "react-razorpay";
 import { useNavigate } from "react-router-dom";
 
 interface Product {
@@ -22,7 +22,7 @@ interface Order {
 
 function ReviewOrder() {
 
-        const [Razorpay] = useRazorpay();
+        const { Razorpay } = useRazorpay();
         const navigate = useNavigate();
 
         const [cart, setCart] = useState<Product[]>([]);
@@ -64,7 +64,7 @@ function ReviewOrder() {
         const handlePayment = (order: Order) => {
                 const rzp = new Razorpay({
                         key: import.meta.env.VITE_RZP_ID,
-                        amount: String(order.amount),
+                        amount: order.amount,
                         currency: 'INR',
                         name: 'Shop Sphere',
                         image: 'https://i.imghippo.com/files/b6tVw1717655776.png',
@@ -72,12 +72,16 @@ function ReviewOrder() {
                         theme: {
                                 color: '#2A5D9C'
                         },
-                        handler: async (res) => {
-                                await axios.post('/verifyPayment', res, {
-                                        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-                                })
-
-                                navigate(`/order/${order.id}`);
+                        handler: async (res: any) => {
+                                try{
+                                        await axios.post('/verifyPayment', res, {
+                                                headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+                                        })
+        
+                                        navigate(`/order/${order.id}`);
+                                } catch (err) {
+                                        console.log(err);
+                                }                                
                         }
                 })
 
