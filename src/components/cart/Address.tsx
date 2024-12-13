@@ -85,7 +85,7 @@ function Address(props: AddressProps) {
                                                 <Box height={'95%'} mx={4} flexBasis={'55%'} display={'flex'} flexDirection={'column'} alignItems={'center'} justifyContent={'center'} bgcolor={'#ffffff'} boxShadow={'0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'}>
                                                         <img src="no-address.jpg" width={'300px'} />
                                                         <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
-                                                                <Typography variant="h4">You do not have any saved addresses</Typography>
+                                                                <Typography variant="h4">You don't have any saved addresses</Typography>
                                                                 <Typography variant="h6" color={'#9CA3AF'}>Guess it's time to pick your shipping adventure!</Typography>
                                                         </Box>
                                                 </Box>
